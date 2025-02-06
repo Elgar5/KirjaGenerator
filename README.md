@@ -1,7 +1,7 @@
 # KirjaGenerator
 
 Työkalut:
-  -Trello
+-Trello
   -VScode
   -Github
 
