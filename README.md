@@ -1,19 +1,19 @@
 # KirjaGenerator
 
-Työkalut:
-  Trello
-  VScode
-  Github
+Työkalut
+  -Trello
+  -VScode
+  -Github
 
-Roolit: 
-  Tuoteomistaja: Elias
-  SCRUM master: Ville
-  Kehitystiimi: Teemu, Olli
+Roolit
+  -Tuoteomistaja: Elias
+  -SCRUM master: Ville
+  -Kehitystiimi: Teemu, Olli
 
 
-Kommunikaatiokanava:
-  Teams
+Kommunikaatiokanava
+  -Teams
   
-Avunsaanti:
-  joka aamu standuppi(noin joku 5 min).
+Avunsaanti
+  -joka aamu standuppi(noin joku 5 min).
 
