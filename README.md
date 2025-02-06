@@ -5,7 +5,7 @@ Työkalut:
 -VScode
 -Github
 
-Roolit:
+Roolit: 
 -Tuoteomistaja: Elias
 -SCRUM master: Ville
 -Kehitystiimi: Teemu, Olli
