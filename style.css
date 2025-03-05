@@ -1,0 +1,76 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #dbdbfe;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #444;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+}
+
+#bookForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#bookInput {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+#bookForm button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5c6bc0;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#bookForm button:hover {
+    background-color: #3949ab;
+}
+
+#results {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#results div {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+#results img {
+    max-width: 120px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+#results .book-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

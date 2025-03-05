@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Books API Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Google Books API Test</h1>
+    <!-- Form to input book name and search -->
+    <form id="bookForm">
+        <label for="bookInput">Enter Book Name:</label>
+        <input type="text" id="bookInput" name="bookInput">
+        <button type="button" onclick="searchBook()">Search</button>
+    </form>
+
+    <!-- Div to display search results -->
+    <div id="results"></div>
+
+    <script>
+        // Function to search for books using Google Books API
+        function searchBook() {
+            var bookName = document.getElementById('bookInput').value;
+            var apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookName}`;
+
+            // Fetch data from Google Books API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+
+                    // Loop through each book item and display its information
+                    data.items.forEach(item => {
+                        var book = item.volumeInfo;
+                        var bookElement = document.createElement('div');
+                        var bookCover = book.imageLinks ? `<img src="${book.imageLinks.thumbnail}" alt="Book Cover">` : '';
+                        bookElement.innerHTML = `${bookCover}
+                            <div class="book-info">
+                                <h3>${book.title}</h3>
+                                <p><strong>Author(s):</strong> ${book.authors ? book.authors.join(', ') : 'N/A'}</p>
+                                <p>${book.description}</p>
+                                <p><strong>Published:</strong> ${book.publishedDate}</p>
+                            </div>`;
+                        resultsDiv.appendChild(bookElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>
