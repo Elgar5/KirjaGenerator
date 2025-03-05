@@ -27,6 +27,22 @@ public class KäyttäjäTietokanta
                     salasana TEXT NOT NULL
                 );";
             }
+            command.ExecuteNonQuery();
+        }
+        connection.Close();
+    }
+
+    public void AddAndCheckId()
+    {
+        using (var connection = new SqliteConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT MAX(id) FROM Käyttäjät";
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
