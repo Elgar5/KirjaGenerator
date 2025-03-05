@@ -6,34 +6,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Books API Test</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* kirjautumis sivun tyyli,koko etc */
+        #auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .auth-form input {
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        .auth-form button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #message {
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        .success-message {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .error-message {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        #book-search-container {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Google Books API Test</h1>
-    <!-- Form to input book name and search -->
-    <form id="bookForm">
-        <label for="bookInput">Enter Book Name:</label>
-        <input type="text" id="bookInput" name="bookInput">
-        <button type="button" onclick="searchBook()">Search</button>
-    </form>
+    <!-- sisältää kirjautumisen -->
+    <div id="auth-container">
+        <div id="login-form" class="auth-form">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button onclick="loginUser()">Login</button>
+            <p>Don't have an account? <a href="#" onclick="toggleForm()">Register</a></p>
+        </div>
 
-    <!-- Div to display search results -->
-    <div id="results"></div>
+        <div id="register-form" class="auth-form" style="display:none;">
+            <h2>Register</h2>
+            <input type="text" id="register-username" placeholder="Username" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <button onclick="registerUser()">Register</button>
+            <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <!-- kirjahaku -->
+    <div id="book-search-container">
+        <h1>Google Books API Test</h1>
+        <form id="bookForm">
+            <label for="bookInput">Enter Book Name:</label>
+            <input type="text" id="bookInput" name="bookInput">
+            <button type="button" onclick="searchBook()">Search</button>
+            <button type="button" onclick="logout()">Logout</button>
+        </form>
+
+        <!-- näyttää löydetyt kirjat-->
+        <div id="results"></div>
+    </div>
 
     <script>
-        // Function to search for books using Google Books API
+        // kirjautumis
+        let currentUser = null;
+
+        // Simulate a simple user database (replace with actual backend in production)
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+        function showMessage(message, isSuccess) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = isSuccess ? 'success-message' : 'error-message';
+        }
+
+        function toggleForm() {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'flex';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'flex';
+            }
+        }
+
+        function registerUser() {
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+
+            if (!username || !password) {
+                showMessage('Please enter both username and password', false);
+                return;
+            }
+
+            if (users[username]) {
+                showMessage('Username already exists', false);
+                return;
+            }
+
+            // salasana hashing
+            users[username] = {
+                password: btoa(password),
+                books: []
+            };
+
+            localStorage.setItem('users', JSON.stringify(users));
+            showMessage('Registration successful', true);
+            toggleForm();
+        }
+
+        function loginUser() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            if (!users[username]) {
+                showMessage('User not found', false);
+                return;
+            }
+
+            // tarkistaa salasanan
+            if (users[username].password !== btoa(password)) {
+                showMessage('Invalid password', false);
+                return;
+            }
+
+            currentUser = username;
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('book-search-container').style.display = 'block';
+            showMessage('Login successful', true);
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('auth-container').style.display = 'block';
+            document.getElementById('book-search-container').style.display = 'none';
+            document.getElementById('message').textContent = '';
+        }
+
+        // kirjahaku
         function searchBook() {
+            if (!currentUser) {
+                showMessage('Please log in first', false);
+                return;
+            }
+
             var bookName = document.getElementById('bookInput').value;
             var apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookName}`;
 
-            // Fetch data from Google Books API
+            // hakee datan google apilta
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     var resultsDiv = document.getElementById('results');
                     resultsDiv.innerHTML = '';
 
-                    // Loop through each book item and display its information
+                    // näyttää tietoa kirjasta
                     data.items.forEach(item => {
                         var book = item.volumeInfo;
                         var bookElement = document.createElement('div');
@@ -42,13 +197,16 @@
                             <div class="book-info">
                                 <h3>${book.title}</h3>
                                 <p><strong>Author(s):</strong> ${book.authors ? book.authors.join(', ') : 'N/A'}</p>
-                                <p>${book.description}</p>
+                                <p>${book.description || 'No description available'}</p>
                                 <p><strong>Published:</strong> ${book.publishedDate}</p>
                             </div>`;
                         resultsDiv.appendChild(bookElement);
                     });
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    showMessage('Failed to fetch books', false);
+                });
         }
     </script>
 </body>
