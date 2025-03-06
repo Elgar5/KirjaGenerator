@@ -332,19 +332,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Olli\\.nuget\\packages\\": {}
+    "C:\\Users\\teemu\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OhKe\\API TESTI\\API TESTI.csproj",
+      "projectUniqueName": "C:\\Github\\KirjaGenerator\\API TESTI.csproj",
       "projectName": "API TESTI",
-      "projectPath": "C:\\OhKe\\API TESTI\\API TESTI.csproj",
-      "packagesPath": "C:\\Users\\Olli\\.nuget\\packages\\",
-      "outputPath": "C:\\OhKe\\API TESTI\\obj\\",
+      "projectPath": "C:\\Github\\KirjaGenerator\\API TESTI.csproj",
+      "packagesPath": "C:\\Users\\teemu\\.nuget\\packages\\",
+      "outputPath": "C:\\Github\\KirjaGenerator\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Olli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\teemu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -397,7 +402,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
