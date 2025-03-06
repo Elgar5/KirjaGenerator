@@ -1,76 +1,204 @@
+/* Perusvärit (vaalea tila oletuksena) */
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --card-border: #e1e1e6;
+    --button-bg: #4f46e5;
+    --button-hover-bg: #4338ca;
+}
+
+/* Tumma tila (dark mode) */
+.dark-mode {
+    --bg-color: #181818;
+    --text-color: #e0e0e0;
+    --card-bg: #242424;
+    --card-border: #3a3a3a;
+    --button-bg: #4f46e5;
+    --button-hover-bg: #4338ca;
+}
+
+/* Yleiset tyylit */
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #dbdbfe;
-    color: #333;
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    color: #444;
+    color: var(--text-color);
     text-align: center;
     margin-top: 20px;
     font-size: 2.5em;
 }
 
+/* Lomake keskelle ja moderni tyyli */
 #bookForm {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     margin: 20px 0;
+    flex-wrap: wrap;
 }
 
-#bookInput {
-    width: 300px;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+#bookForm select,
+#bookForm input {
+    padding: 10px 15px;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
     font-size: 1em;
-    margin-right: 10px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-width: 150px;
 }
 
 #bookForm button {
-    padding: 10px 20px;
+    padding: 10px 25px;
     border: none;
-    border-radius: 5px;
-    background-color: #5c6bc0;
+    border-radius: 6px;
+    background-color: var(--button-bg);
     color: white;
     font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #bookForm button:hover {
-    background-color: #3949ab;
+    background-color: var(--button-hover-bg);
+    transform: translateY(-2px);
 }
 
+/* Tulokset - korttimainen ulkoasu */
 #results {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
 }
 
 #results div {
     display: flex;
     align-items: flex-start;
-    border: 1px solid #ddd;
-    padding: 15px;
+    gap: 20px;
+    padding: 20px;
     margin: 15px 0;
-    border-radius: 5px;
-    background-color: #fafafa;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: background-color 0.3s ease;
+}
+
+#results div:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 #results img {
-    max-width: 120px;
-    margin-right: 15px;
-    border-radius: 5px;
+    max-width: 130px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 #results .book-info {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+#results .book-info h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+#results .book-info p {
+    margin: 0;
+    font-size: 1em;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+#results .book-info strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* Login/Register nappi */
+#loginButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginButton:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Tumma tila -nappi */
+#themeToggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#themeToggle:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Mobiiliystävällisyys */
+@media (max-width: 600px) {
+    #bookForm {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #results {
+        padding: 15px;
+    }
+
+    #results div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #results img {
+        margin-bottom: 10px;
+    }
+
+    #themeToggle {
+        top: 60px;
+        left: 20px;
+    }
 }
