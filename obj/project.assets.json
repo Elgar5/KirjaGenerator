@@ -332,19 +332,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Olli\\.nuget\\packages\\": {}
+    "C:\\Users\\ville\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OhKe\\API TESTI\\API TESTI.csproj",
+      "projectUniqueName": "C:\\Users\\ville\\Documents\\GitHub\\KirjaGenerator\\API TESTI.csproj",
       "projectName": "API TESTI",
-      "projectPath": "C:\\OhKe\\API TESTI\\API TESTI.csproj",
-      "packagesPath": "C:\\Users\\Olli\\.nuget\\packages\\",
-      "outputPath": "C:\\OhKe\\API TESTI\\obj\\",
+      "projectPath": "C:\\Users\\ville\\Documents\\GitHub\\KirjaGenerator\\API TESTI.csproj",
+      "packagesPath": "C:\\Users\\ville\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ville\\Documents\\GitHub\\KirjaGenerator\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Olli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ville\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

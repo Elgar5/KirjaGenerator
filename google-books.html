@@ -132,7 +132,7 @@
                 return;
             }
 
-            // salasana hashing
+            // password hashing
             users[username] = {
                 password: btoa(password),
                 books: []
@@ -152,7 +152,7 @@
                 return;
             }
 
-            // tarkistaa salasanan
+            // tarkistaa passwordn
             if (users[username].password !== btoa(password)) {
                 showMessage('Invalid password', false);
                 return;
