@@ -39,6 +39,7 @@ public class UserDataBase
 
                 command.ExecuteNonQuery();
             }
+            connection.Close();
         }
     }
 
@@ -52,7 +53,7 @@ public class UserDataBase
         }
     }
 
-   
+
     public bool RegisterUser(string userName, string password)
     {
         // tarkistaa annetun tunnuksen
@@ -104,7 +105,7 @@ public class UserDataBase
         }
     }
 
-    
+
     public bool LoginUser(string userName, string password)
     {
         // tarkistaa jälleen
@@ -193,7 +194,7 @@ public class UserDataBase
             return false;
         }
     }
-        // metodi, joka liittää käyttäjä ID:n luodulle käyttäjätunnukselle joka tallennetaan databaseen. Käyttäjätunnus tai ID ei voi olla null.
+    // metodi, joka liittää käyttäjä ID:n luodulle käyttäjätunnukselle joka tallennetaan databaseen. Käyttäjätunnus tai ID ei voi olla null.
     public int GetUserId(string userName)
     {
         if (string.IsNullOrWhiteSpace(userName))
