@@ -193,4 +193,39 @@ public class UserDataBase
             return false;
         }
     }
+        // metodi, joka liittää käyttäjä ID:n luodulle käyttäjätunnukselle joka tallennetaan databaseen. Käyttäjätunnus tai ID ei voi olla null.
+    public int GetUserId(string käyttäjänimi)
+    {
+        if (string.IsNullOrWhiteSpace(käyttäjänimi))
+        {
+            Console.WriteLine("Käyttäjänimi ei voi olla tyhjä.");
+            return -1;
+        }
+
+        try
+        {
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                    SELECT id 
+                    FROM Käyttäjät 
+                    WHERE käyttäjä_nimi = @käyttäjäNimi;";
+
+                    command.Parameters.AddWithValue("@käyttäjäNimi", käyttäjänimi);
+
+                    object result = command.ExecuteScalar();
+                    return result == null ? -1 : Convert.ToInt32(result);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Virhe käyttäjä ID:n hakemisessa: {ex.Message}");
+            return -1;
+        }
+    }
 }
