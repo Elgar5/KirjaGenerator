@@ -229,4 +229,37 @@ public class UserDataBase
             return -1;
         }
     }
+    public void DeleteUser(string userName)
+    {
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            Console.WriteLine("Username cannot be empty.");
+        }
+
+        try
+        {
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                    DELETE
+                    FROM Users 
+                    WHERE user_name = @userName;";
+
+                    command.Parameters.AddWithValue("@userName", userName);
+
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error while deleting user: {ex.Message}");
+           
+        }
+    }
 }
