@@ -202,3 +202,48 @@ h1 {
         left: 20px;
     }
 }
+
+#auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-form input {
+    padding: 8px;
+}
+
+.auth-form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#message {
+    margin: 10px 0;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.error-message {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+#book-search-container {
+    display: none;
+}
