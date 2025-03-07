@@ -5,13 +5,13 @@ using Microsoft.Data.Sqlite;
 using System.Security.Cryptography;
 using System.Text;
 
-public class KäyttäjäTietokanta
+public class UserDataBase
 {
-    private string _connectionString = "Data Source=Käyttäjä.db";
+    private string _connectionString = "Data Source=User.db";
 
     public static void Main(string[] args)
     {
-        var userDb = new KäyttäjäTietokanta();
+        var userDb = new UserDataBase();
         userDb.CreateTable();
 
         // esimerkki
@@ -31,10 +31,10 @@ public class KäyttäjäTietokanta
             using (var command = connection.CreateCommand())
             {
                 command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Käyttäjät (
+                CREATE TABLE IF NOT EXISTS Users (
                     id INTEGER PRIMARY KEY,
-                    käyttäjä_nimi TEXT NOT NULL UNIQUE,
-                    salasana TEXT NOT NULL
+                    user_name TEXT NOT NULL UNIQUE,
+                    password TEXT NOT NULL
                 );";
 
                 command.ExecuteNonQuery();
@@ -42,7 +42,7 @@ public class KäyttäjäTietokanta
         }
     }
 
-    // tiivistää salasana  SHA256 avulla
+    // tiivistää salasanan SHA256 avulla
     private string HashPassword(string password)
     {
         using (SHA256 sha256 = SHA256.Create())
@@ -52,18 +52,18 @@ public class KäyttäjäTietokanta
         }
     }
 
-    // rekisteröinti metodi
-    public bool RegisterUser(string käyttäjäNimi, string salasana)
+   
+    public bool RegisterUser(string userName, string password)
     {
         // tarkistaa annetun tunnuksen
-        if (string.IsNullOrWhiteSpace(käyttäjäNimi) || string.IsNullOrWhiteSpace(salasana))
+        if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
         {
-            Console.WriteLine("Käyttäjänimi ja salasana eivät voi olla tyhjiä.");
+            Console.WriteLine("Username and password can not be empty.");
             return false;
         }
 
-        // tiivistää salasanan
-        string hashedSalasana = HashPassword(salasana);
+        // tiivistää passwordn
+        string hashedPassword = HashPassword(password);
 
         try
         {
@@ -74,11 +74,11 @@ public class KäyttäjäTietokanta
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                    INSERT INTO Käyttäjät (käyttäjä_nimi, salasana) 
-                    VALUES (@käyttäjäNimi, @salasana);";
+                    INSERT INTO Users (user_name, password) 
+                    VALUES (@userName, @password);";
 
-                    command.Parameters.AddWithValue("@käyttäjäNimi", käyttäjäNimi);
-                    command.Parameters.AddWithValue("@salasana", hashedSalasana);
+                    command.Parameters.AddWithValue("@userName", userName);
+                    command.Parameters.AddWithValue("@password", hashedPassword);
 
                     int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected > 0;
@@ -90,32 +90,32 @@ public class KäyttäjäTietokanta
             // tarkistaa että on uniikki
             if (ex.SqliteErrorCode == 19) // SQLite virhe jos ei uniikki
             {
-                Console.WriteLine("Käyttäjänimi on jo käytössä.");
+                Console.WriteLine("Username is allready in use.");
                 return false;
             }
 
-            Console.WriteLine($"Virhe rekisteröinnissä: {ex.Message}");
+            Console.WriteLine($"Error while registering: {ex.Message}");
             return false;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Odottamaton virhe: {ex.Message}");
+            Console.WriteLine($"Unhandled exeption: {ex.Message}");
             return false;
         }
     }
 
-    // kirjautumus metodi
-    public bool LoginUser(string käyttäjäNimi, string salasana)
+    
+    public bool LoginUser(string userName, string password)
     {
         // tarkistaa jälleen
-        if (string.IsNullOrWhiteSpace(käyttäjäNimi) || string.IsNullOrWhiteSpace(salasana))
+        if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
         {
-            Console.WriteLine("Käyttäjänimi ja salasana eivät voi olla tyhjiä.");
+            Console.WriteLine("Username and password can not be empty.");
             return false;
         }
 
         // tiivistää annetun salasanan
-        string hashedSalasana = HashPassword(salasana);
+        string hashedPassword = HashPassword(password);
 
         try
         {
@@ -127,11 +127,11 @@ public class KäyttäjäTietokanta
                 {
                     command.CommandText = @"
                     SELECT COUNT(*) 
-                    FROM Käyttäjät 
-                    WHERE käyttäjä_nimi = @käyttäjäNimi AND salasana = @salasana;";
+                    FROM Users 
+                    WHERE user_name = @userName AND password = @password;";
 
-                    command.Parameters.AddWithValue("@käyttäjäNimi", käyttäjäNimi);
-                    command.Parameters.AddWithValue("@salasana", hashedSalasana);
+                    command.Parameters.AddWithValue("@userName", userName);
+                    command.Parameters.AddWithValue("@password", hashedPassword);
 
                     long count = (long)command.ExecuteScalar();
                     return count > 0;
@@ -140,31 +140,31 @@ public class KäyttäjäTietokanta
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Virhe kirjautumisessa: {ex.Message}");
+            Console.WriteLine($"Login error: {ex.Message}");
             return false;
         }
     }
 
-    // voit vaihtaa salasanaa
-    public bool ChangePassword(string käyttäjäNimi, string vanhaaSalasana, string uusiSalasana)
+
+    public bool ChangePassword(string userName, string oldPassword, string newPassword)
     {
         // tarkistaa annetut asiat
-        if (string.IsNullOrWhiteSpace(käyttäjäNimi) ||
-            string.IsNullOrWhiteSpace(vanhaaSalasana) ||
-            string.IsNullOrWhiteSpace(uusiSalasana))
+        if (string.IsNullOrWhiteSpace(userName) ||
+            string.IsNullOrWhiteSpace(oldPassword) ||
+            string.IsNullOrWhiteSpace(newPassword))
         {
-            Console.WriteLine("Kaikki kentät ovat pakollisia.");
+            Console.WriteLine("All fields required.");
             return false;
         }
 
         // vahvista vanha salasana
-        if (!LoginUser(käyttäjäNimi, vanhaaSalasana))
+        if (!LoginUser(userName, oldPassword))
         {
-            Console.WriteLine("Vanha salasana on väärä.");
+            Console.WriteLine("Old password is incorrect");
             return false;
         }
 
-        string hashedUusiSalasana = HashPassword(uusiSalasana);
+        string hashedNewPassword = HashPassword(newPassword);
 
         try
         {
@@ -175,12 +175,12 @@ public class KäyttäjäTietokanta
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                    UPDATE Käyttäjät 
-                    SET salasana = @uusiSalasana 
-                    WHERE käyttäjä_nimi = @käyttäjäNimi;";
+                    UPDATE Users 
+                    SET password = @newPassword 
+                    WHERE user_name = @userName;";
 
-                    command.Parameters.AddWithValue("@uusiSalasana", hashedUusiSalasana);
-                    command.Parameters.AddWithValue("@käyttäjäNimi", käyttäjäNimi);
+                    command.Parameters.AddWithValue("@newPassword", hashedNewPassword);
+                    command.Parameters.AddWithValue("@userName", userName);
 
                     int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected > 0;
@@ -189,8 +189,43 @@ public class KäyttäjäTietokanta
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Virhe salasanan vaihdossa: {ex.Message}");
+            Console.WriteLine($"Error while changing password: {ex.Message}");
             return false;
+        }
+    }
+        // metodi, joka liittää käyttäjä ID:n luodulle käyttäjätunnukselle joka tallennetaan databaseen. Käyttäjätunnus tai ID ei voi olla null.
+    public int GetUserId(string userName)
+    {
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            Console.WriteLine("Username cannot be empty.");
+            return -1;
+        }
+
+        try
+        {
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                    SELECT id 
+                    FROM Users 
+                    WHERE user_name = @userName;";
+
+                    command.Parameters.AddWithValue("@userName", userName);
+
+                    object result = command.ExecuteScalar();
+                    return result == null ? -1 : Convert.ToInt32(result);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error getting user ID: {ex.Message}");
+            return -1;
         }
     }
 }
