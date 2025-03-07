@@ -194,11 +194,11 @@ public class UserDataBase
         }
     }
         // metodi, joka liittää käyttäjä ID:n luodulle käyttäjätunnukselle joka tallennetaan databaseen. Käyttäjätunnus tai ID ei voi olla null.
-    public int GetUserId(string käyttäjänimi)
+    public int GetUserId(string userName)
     {
-        if (string.IsNullOrWhiteSpace(käyttäjänimi))
+        if (string.IsNullOrWhiteSpace(userName))
         {
-            Console.WriteLine("Käyttäjänimi ei voi olla tyhjä.");
+            Console.WriteLine("Username cannot be empty.");
             return -1;
         }
 
@@ -212,10 +212,10 @@ public class UserDataBase
                 {
                     command.CommandText = @"
                     SELECT id 
-                    FROM Käyttäjät 
-                    WHERE käyttäjä_nimi = @käyttäjäNimi;";
+                    FROM Users 
+                    WHERE user_name = @userName;";
 
-                    command.Parameters.AddWithValue("@käyttäjäNimi", käyttäjänimi);
+                    command.Parameters.AddWithValue("@userName", userName);
 
                     object result = command.ExecuteScalar();
                     return result == null ? -1 : Convert.ToInt32(result);
@@ -224,7 +224,7 @@ public class UserDataBase
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Virhe käyttäjä ID:n hakemisessa: {ex.Message}");
+            Console.WriteLine($"Error getting user ID: {ex.Message}");
             return -1;
         }
     }
