@@ -1,0 +1,149 @@
+﻿@page
+@model IndexModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Google Books API</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+</head>
+
+<body>
+
+    <!-- Navigaatiopalkki -->
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="/">Home</a>
+            <a href="/Privacy">Privacy</a>
+        </div>
+        <div class="nav-right">
+            <button id="loginButton">🔑 Login</button>
+            <button id="themeToggle">🌙 Tumma tila</button>
+        </div>
+    </div>
+
+    <!-- Kirjautumisikkuna -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username">
+            <input type="password" id="login-password" placeholder="Password">
+            <button onclick="loginUser()">Login</button>
+            <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+        </div>
+    </div>
+
+    <!-- Rekisteröinti-ikkuna -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register</h2>
+            <input type="text" id="register-username" placeholder="Username">
+            <input type="password" id="register-password" placeholder="Password">
+            <button onclick="registerUser()">Register</button>
+            <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h1>Google Books API Test</h1>
+        <div class="search-box">
+            <label for="searchType">Select Search Type:</label>
+            <select id="searchType" onchange="toggleSearchInput()">
+                <option value="random">Random</option>
+                <option value="year">Year</option>
+                <option value="author">Author</option>
+                <option value="genre">Genre</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Optional">
+            <select id="genreSelect" style="display:none;">
+                <option value="action">Action</option>
+                <option value="adventure">Adventure</option>
+                <option value="biography">Biography</option>
+                <option value="fiction">Fiction</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="history">History</option>
+                <option value="horror">Horror</option>
+                <option value="mystery">Mystery</option>
+                <option value="romance">Romance</option>
+                <option value="science fiction">Science Fiction</option>
+                <option value="thriller">Thriller</option>
+            </select>
+            <button onclick="searchBook()">Search</button>
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <!-- JavaScript-tiedoston lataus -->
+    <script src="~/js/site.js"></script>
+
+    <script>
+        function toggleSearchInput() {
+            const type = document.getElementById('searchType').value;
+            document.getElementById('searchInput').style.display = (type !== 'genre') ? 'block' : 'none';
+            document.getElementById('genreSelect').style.display = (type === 'genre') ? 'block' : 'none';
+        }
+
+        function searchBook() {
+            const searchType = document.getElementById('searchType').value;
+            const searchInput = document.getElementById('searchInput').value;
+            const genre = document.getElementById('genreSelect').value;
+            let query = '';
+
+            if (searchType === 'author') {
+                query = `inauthor:${searchInput}`;
+            } else if (searchType === 'year') {
+                query = 'book';
+            } else if (searchType === 'genre') {
+                query = `subject:${genre}`;
+            } else {
+                query = 'book';
+            }
+
+            // Haetaan 20 kirjaa ja valitaan niistä satunnainen
+            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const books = data.items;
+                    if (!books || books.length === 0) {
+                        document.getElementById('results').innerHTML = '<p>No books found.</p>';
+                        return;
+                    }
+
+                    // Valitaan satunnainen kirja tuloslistasta
+                    const randomBook = books[Math.floor(Math.random() * books.length)].volumeInfo;
+
+                    const title = randomBook.title || 'No title available';
+                    const authors = randomBook.authors ? randomBook.authors.join(', ') : 'Unknown author';
+                    const publishedDate = randomBook.publishedDate || 'Unknown date';
+                    const description = randomBook.description ? randomBook.description.substring(0, 300) + '...' : 'No description available.';
+                    const thumbnail = randomBook.imageLinks?.thumbnail || '';
+
+                    document.getElementById('results').innerHTML = `
+                        <div class="book-card">
+                            ${thumbnail ? `<img src="${thumbnail}" alt="Book Cover">` : ''}
+                            <div>
+                                <h3>${title}</h3>
+                                <p><strong>Authors:</strong> ${authors}</p>
+                                <p><strong>Published:</strong> ${publishedDate}</p>
+                                <p>${description}</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error fetching book data:", error);
+                    document.getElementById('results').innerHTML = '<p>Failed to fetch books. Please try again.</p>';
+                });
+        }
+    </script>
+
+    <script src="~/js/site.js"></script>
+</body>
+
+</html>

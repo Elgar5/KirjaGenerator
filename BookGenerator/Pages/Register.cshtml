@@ -1,0 +1,9 @@
+@page
+@model RegisterModel
+<h2>Register</h2>
+<form method="post" class="auth-form">
+    <input type="text" asp-for="UserName" placeholder="Username" required>
+    <input type="password" asp-for="Password" placeholder="Password" required>
+    <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="/Login">Login</a></p>
