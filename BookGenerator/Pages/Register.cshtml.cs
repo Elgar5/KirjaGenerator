@@ -1,53 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
-using System.Threading.Tasks;
 
 public class RegisterModel : PageModel
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _db;
 
-    public RegisterModel(AppDbContext context)
+    public RegisterModel(AppDbContext db)
     {
-        _context = context;
+        _db = db;
     }
 
     [BindProperty]
-    public string UserName { get; set; }
-
+    public string Username { get; set; }
+    
     [BindProperty]
     public string Password { get; set; }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+        if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
+            ModelState.AddModelError("", "Username and password are required.");
             return Page();
         }
 
-        var existingUser = await _context.Users.FindAsync(UserName);
-        if (existingUser != null)
+        // Tarkista, onko käyttäjänimi jo käytössä
+        if (await _db.Users.AnyAsync(u => u.Username == Username))
         {
-            ModelState.AddModelError(string.Empty, "Username already exists.");
+            ModelState.AddModelError("", "Username already exists.");
             return Page();
         }
 
-        var newUser = new User
-        {
-            UserName = UserName,
-            PasswordHash = HashPassword(Password)
-        };
+        // Luo hashattu salasana
+        string passwordHash = HashPassword(Password);
 
-        _context.Users.Add(newUser);
-        await _context.SaveChangesAsync();
+        // Lisää uusi käyttäjä tietokantaan
+        var user = new User { Username = Username, PasswordHash = passwordHash };
+        _db.Users.Add(user);
+        await _db.SaveChangesAsync();
 
-        return RedirectToPage("/Login");
+        return RedirectToPage("/Account/Login");
     }
 
     private string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();
-        return Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(password)));
+        var bytes = Encoding.UTF8.GetBytes(password);
+        var hash = sha256.ComputeHash(bytes);
+        return Convert.ToBase64String(hash);
     }
 }

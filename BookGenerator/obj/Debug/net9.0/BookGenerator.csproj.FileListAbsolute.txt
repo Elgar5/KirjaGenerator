@@ -359,7 +359,6 @@ C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\scopedcss\bundle\Book
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\scopedcss\projectbundle\BookGenerator.bundle.scp.css
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\o1vhi3kb82-qj77956t97.gz
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\vwhiffpg46-61n19gt1b8.gz
-C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\y4jt13c3qs-z6otdxidsr.gz
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\amr01f3u4l-bqjiyaj88i.gz
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\doblfaa8lq-c2jlpeoesf.gz
 C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\ps2ry471xz-erw9l3u2r3.gz
@@ -450,3 +449,4 @@ C:\Github\KirjaGeneraattori\BookGenerator\bin\Debug\net9.0\Microsoft.Extensions.
 C:\Github\KirjaGeneraattori\BookGenerator\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
 C:\Github\KirjaGeneraattori\BookGenerator\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Github\KirjaGeneraattori\BookGenerator\bin\Debug\net9.0\System.Text.Json.dll
+C:\Github\KirjaGeneraattori\BookGenerator\obj\Debug\net9.0\compressed\y4jt13c3qs-fonfoqyuat.gz

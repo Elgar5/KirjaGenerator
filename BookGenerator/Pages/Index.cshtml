@@ -1,5 +1,7 @@
 ﻿@page
 @model IndexModel
+@inject IHttpContextAccessor HttpContextAccessor
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,9 +20,18 @@
             <a href="/Privacy">Privacy</a>
         </div>
         <div class="nav-right">
-            <button id="loginButton">🔑 Login</button>
+            @if (HttpContextAccessor.HttpContext?.Session.GetString("Username") != null)
+            {
+                <span>Welcome, @HttpContextAccessor.HttpContext.Session.GetString("Username")</span>
+                <button id="logoutButton">🚪 Logout</button>
+            }
+            else
+            {
+                <button id="loginButton">🔑 Login</button>
+            }
             <button id="themeToggle">🌙 Tumma tila</button>
         </div>
+
     </div>
 
     <!-- Kirjautumisikkuna -->
@@ -103,8 +114,8 @@
                 query = 'book';
             }
 
-            // Haetaan 20 kirjaa ja valitaan niistä satunnainen
-            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
+            // Haetaan 40 kirjaa ja valitaan niistä satunnainen
+            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
 
             fetch(apiUrl)
                 .then(response => response.json())

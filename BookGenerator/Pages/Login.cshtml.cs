@@ -1,40 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Linq;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
-using System.Threading.Tasks;
 
 public class LoginModel : PageModel
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _db;
 
-    public LoginModel(AppDbContext context)
+    public LoginModel(AppDbContext db)
     {
-        _context = context;
+        _db = db;
     }
 
     [BindProperty]
-    public string UserName { get; set; }
-
+    public string Username { get; set; }
+    
     [BindProperty]
     public string Password { get; set; }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+        if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
+            ModelState.AddModelError("", "Username and password are required.");
             return Page();
         }
 
-        var hashedPassword = HashPassword(Password);
-        var user = _context.Users.FirstOrDefault(u => u.UserName == UserName && u.PasswordHash == hashedPassword);
-
-        if (user == null)
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == Username);
+        if (user == null || user.PasswordHash != HashPassword(Password))
         {
-            ModelState.AddModelError(string.Empty, "Invalid credentials.");
+            ModelState.AddModelError("", "Invalid username or password.");
             return Page();
         }
+
+        // Tallenna käyttäjänimi istuntoon
+        HttpContext.Session.SetString("Username", Username);
 
         return RedirectToPage("/Index");
     }
@@ -42,6 +43,8 @@ public class LoginModel : PageModel
     private string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();
-        return Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(password)));
+        var bytes = Encoding.UTF8.GetBytes(password);
+        var hash = sha256.ComputeHash(bytes);
+        return Convert.ToBase64String(hash);
     }
 }
