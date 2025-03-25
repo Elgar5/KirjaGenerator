@@ -1,50 +1,48 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 public class LoginModel : PageModel
 {
-    private readonly AppDbContext _db;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public LoginModel(AppDbContext db)
+    public LoginModel(SignInManager<ApplicationUser> signInManager)
     {
-        _db = db;
+        _signInManager = signInManager;
     }
 
     [BindProperty]
-    public string Username { get; set; }
-    
-    [BindProperty]
-    public string Password { get; set; }
+    public InputModel Input { get; set; }
+
+    public class InputModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+        if (ModelState.IsValid)
         {
-            ModelState.AddModelError("", "Username and password are required.");
-            return Page();
+            // Yritetään kirjautua sähköpostilla
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, isPersistent: false, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            // Asetetaan geneerinen virheilmoitus (turvallisuussyistä)
+            ModelState.AddModelError(string.Empty, "The password is incorrect or the ID does not exist.");
         }
 
-        var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == Username);
-        if (user == null || user.PasswordHash != HashPassword(Password))
-        {
-            ModelState.AddModelError("", "Invalid username or password.");
-            return Page();
-        }
-
-        // Tallenna käyttäjänimi istuntoon
-        HttpContext.Session.SetString("Username", Username);
-
-        return RedirectToPage("/Index");
-    }
-
-    private string HashPassword(string password)
-    {
-        using var sha256 = SHA256.Create();
-        var bytes = Encoding.UTF8.GetBytes(password);
-        var hash = sha256.ComputeHash(bytes);
-        return Convert.ToBase64String(hash);
+        return Page();
     }
 }

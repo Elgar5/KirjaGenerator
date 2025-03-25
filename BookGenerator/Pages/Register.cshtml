@@ -1,9 +1,37 @@
 @page
 @model RegisterModel
-<h2>Register</h2>
-<form method="post" class="auth-form">
-    <input type="text" asp-for="Username" placeholder="Username" required>
-    <input type="password" asp-for="Password" placeholder="Password" required>
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Input.Email"></label>
+        <input asp-for="Input.Email" id="registerEmail" />
+        <span asp-validation-for="Input.Email"></span>
+    </div>
+    <div>
+        <label asp-for="Input.Password"></label>
+        <input asp-for="Input.Password" type="password" id="registerPassword" />
+        <span asp-validation-for="Input.Password"></span>
+    </div>
+    <div>
+        <label asp-for="Input.ConfirmPassword"></label>
+        <input asp-for="Input.ConfirmPassword" type="password" id="registerConfirmPassword" />
+        <span asp-validation-for="Input.ConfirmPassword"></span>
+    </div>
     <button type="submit">Register</button>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="color:red;">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+
 </form>
-<p>Already have an account? <a href="/Login">Login</a></p>

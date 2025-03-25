@@ -1,7 +1,5 @@
 ﻿@page
 @model IndexModel
-@inject IHttpContextAccessor HttpContextAccessor
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,52 +10,6 @@
 </head>
 
 <body>
-
-    <!-- Navigaatiopalkki -->
-    <div class="navbar">
-        <div class="nav-left">
-            <a href="/">Home</a>
-            <a href="/Privacy">Privacy</a>
-        </div>
-        <div class="nav-right">
-            @if (HttpContextAccessor.HttpContext?.Session.GetString("Username") != null)
-            {
-                <span>Welcome, @HttpContextAccessor.HttpContext.Session.GetString("Username")</span>
-                <button id="logoutButton">🚪 Logout</button>
-            }
-            else
-            {
-                <button id="loginButton">🔑 Login</button>
-            }
-            <button id="themeToggle">🌙 Tumma tila</button>
-        </div>
-
-    </div>
-
-    <!-- Kirjautumisikkuna -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Login</h2>
-            <input type="text" id="login-username" placeholder="Username">
-            <input type="password" id="login-password" placeholder="Password">
-            <button onclick="loginUser()">Login</button>
-            <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
-        </div>
-    </div>
-
-    <!-- Rekisteröinti-ikkuna -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Register</h2>
-            <input type="text" id="register-username" placeholder="Username">
-            <input type="password" id="register-password" placeholder="Password">
-            <button onclick="registerUser()">Register</button>
-            <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
-        </div>
-    </div>
-
 
     <div class="container">
         <h1>Google Books API Test</h1>
@@ -88,7 +40,7 @@
         <div id="results"></div>
     </div>
 
-    <!-- JavaScript-tiedoston lataus -->
+    <!-- JavaScript -->
     <script src="~/js/site.js"></script>
 
     <script>
@@ -114,8 +66,7 @@
                 query = 'book';
             }
 
-            // Haetaan 40 kirjaa ja valitaan niistä satunnainen
-            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
+            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -126,7 +77,6 @@
                         return;
                     }
 
-                    // Valitaan satunnainen kirja tuloslistasta
                     const randomBook = books[Math.floor(Math.random() * books.length)].volumeInfo;
 
                     const title = randomBook.title || 'No title available';
@@ -154,7 +104,6 @@
         }
     </script>
 
-    <script src="~/js/site.js"></script>
 </body>
 
 </html>

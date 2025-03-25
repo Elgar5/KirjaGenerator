@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Github\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {}
+    "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Github\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {
+    "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Github\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
+        "projectUniqueName": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
         "projectName": "BookGenerator",
-        "projectPath": "C:\\Github\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
+        "projectPath": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
         "packagesPath": "C:\\Users\\teemu\\.nuget\\packages\\",
-        "outputPath": "C:\\Github\\KirjaGeneraattori\\BookGenerator\\obj\\",
+        "outputPath": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,7 +52,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
-              "version": "[2.3.1, )"
+              "version": "[2.3.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -62,11 +62,11 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.2, )"
             }
           },
           "imports": [
@@ -88,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

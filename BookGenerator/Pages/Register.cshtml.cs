@@ -1,55 +1,56 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 public class RegisterModel : PageModel
 {
-    private readonly AppDbContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public RegisterModel(AppDbContext db)
+    public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
-        _db = db;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     [BindProperty]
-    public string Username { get; set; }
-    
-    [BindProperty]
-    public string Password { get; set; }
+    public InputModel Input { get; set; }
+
+    public class InputModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+        if (ModelState.IsValid)
         {
-            ModelState.AddModelError("", "Username and password are required.");
-            return Page();
+            var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+            var result = await _userManager.CreateAsync(user, Input.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToPage("/Index");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
 
-        // Tarkista, onko käyttäjänimi jo käytössä
-        if (await _db.Users.AnyAsync(u => u.Username == Username))
-        {
-            ModelState.AddModelError("", "Username already exists.");
-            return Page();
-        }
-
-        // Luo hashattu salasana
-        string passwordHash = HashPassword(Password);
-
-        // Lisää uusi käyttäjä tietokantaan
-        var user = new User { Username = Username, PasswordHash = passwordHash };
-        _db.Users.Add(user);
-        await _db.SaveChangesAsync();
-
-        return RedirectToPage("/Account/Login");
-    }
-
-    private string HashPassword(string password)
-    {
-        using var sha256 = SHA256.Create();
-        var bytes = Encoding.UTF8.GetBytes(password);
-        var hash = sha256.ComputeHash(bytes);
-        return Convert.ToBase64String(hash);
+        return Page();
     }
 }

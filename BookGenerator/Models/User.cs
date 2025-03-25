@@ -2,13 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 public class User
 {
-    public int Id { get; set; }  // Ensisijainen avain (Primary Key)
+    [Key]
+    public int Id { get; set; }
 
     [Required]
-    public string Username { get; set; }
+    public string UserName { get; set; }
 
     [Required]
-    public string PasswordHash { get; set; } // Tallennetaan hashattuna!
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public string PasswordHash { get; set; } // SHA-256-hashattu salasana
 }
