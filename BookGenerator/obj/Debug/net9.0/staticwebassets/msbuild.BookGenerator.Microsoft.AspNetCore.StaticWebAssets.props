@@ -30,11 +30,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qj77956t97</Fingerprint>
-      <Integrity>9p7t8y/K3Agt5EWr7JWMWFIh85jU6Yl50/AdNAC5ye8=</Integrity>
+      <Fingerprint>hyozdy7lfy</Fingerprint>
+      <Integrity>GQ6sSf55jL8mjNU7nr9oD0VUiwBbceXLU/tm7eYEoMU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Theme-Toggle.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>BookGenerator</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BookGenerator</BasePath>
+      <RelativePath>css/Theme-Toggle.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>qguelxlf83</Fingerprint>
+      <Integrity>uvp5DAq+y5tjPhWUtuLULoVx+yDRm1WSk8EY1TSQdWA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Theme-Toggle.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))">
       <SourceType>Package</SourceType>
@@ -66,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>8gsgeinzbr</Fingerprint>
-      <Integrity>+IWZmPDiIEvJwnvnbQjDFElmcqV/nkuds/Bc/Qs7X4c=</Integrity>
+      <Fingerprint>w5kww7qlxa</Fingerprint>
+      <Integrity>FKoBdPTmLAkgjhlBuYGfVqECjZaDrD0Mq4wApwsR/iI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</OriginalItemSpec>

@@ -1,48 +1,39 @@
 ﻿@page
 @model IndexModel
-<!DOCTYPE html>
-<html lang="en">
+@{
+    ViewData["Title"] = "Home";
+}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Google Books API</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
-</head>
-
-<body>
-
-    <div class="container">
-        <h1>Google Books API Test</h1>
-        <div class="search-box">
-            <label for="searchType">Select Search Type:</label>
-            <select id="searchType" onchange="toggleSearchInput()">
-                <option value="random">Random</option>
-                <option value="year">Year</option>
-                <option value="author">Author</option>
-                <option value="genre">Genre</option>
-            </select>
-            <input type="text" id="searchInput" placeholder="Optional">
-            <select id="genreSelect" style="display:none;">
-                <option value="action">Action</option>
-                <option value="adventure">Adventure</option>
-                <option value="biography">Biography</option>
-                <option value="fiction">Fiction</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="history">History</option>
-                <option value="horror">Horror</option>
-                <option value="mystery">Mystery</option>
-                <option value="romance">Romance</option>
-                <option value="science fiction">Science Fiction</option>
-                <option value="thriller">Thriller</option>
-            </select>
-            <button onclick="searchBook()">Search</button>
-        </div>
-        <div id="results"></div>
+<div class="container">
+    <h1>Google Books API Test</h1>
+    <div class="search-box">
+        <label for="searchType">Select Search Type:</label>
+        <select id="searchType" onchange="toggleSearchInput()">
+            <option value="random">Random</option>
+            <option value="year">Year</option>
+            <option value="author">Author</option>
+            <option value="genre">Genre</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Optional">
+        <select id="genreSelect" style="display:none;">
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="biography">Biography</option>
+            <option value="fiction">Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="history">History</option>
+            <option value="horror">Horror</option>
+            <option value="mystery">Mystery</option>
+            <option value="romance">Romance</option>
+            <option value="science fiction">Science Fiction</option>
+            <option value="thriller">Thriller</option>
+        </select>
+        <button onclick="searchBook()">Search</button>
     </div>
+    <div id="results"></div>
+</div>
 
-    <!-- JavaScript -->
-    <script src="~/js/site.js"></script>
-
+@section Scripts {
     <script>
         function toggleSearchInput() {
             const type = document.getElementById('searchType').value;
@@ -103,7 +94,4 @@
                 });
         }
     </script>
-
-</body>
-
-</html>
+}

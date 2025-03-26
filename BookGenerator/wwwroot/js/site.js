@@ -1,23 +1,17 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    const themeToggle = document.getElementById("themeToggle");
+    const toggle = document.getElementById("themeToggle");
     const body = document.body;
 
-    // 🔹 Ladataan tallennettu teema localStoragesta
+    // Lataa tallennettu tila
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        body.classList.add(savedTheme);
-        updateThemeButton(savedTheme);
+    if (savedTheme === "dark-mode") {
+        body.classList.add("dark-mode");
+        toggle.checked = true;
     }
 
-    // 🔹 Tumma/Vaalea tila -napin toiminta
-    themeToggle.addEventListener("click", function () {
-        const isDark = body.classList.toggle("dark-mode");
+    toggle.addEventListener("change", () => {
+        const isDark = toggle.checked;
+        body.classList.toggle("dark-mode", isDark);
         localStorage.setItem("theme", isDark ? "dark-mode" : "");
-        updateThemeButton(isDark ? "dark-mode" : "");
     });
-
-    // 🔹 Päivittää napin tekstin
-    function updateThemeButton(theme) {
-        themeToggle.innerHTML = theme === "dark-mode" ? "☀️ Vaalea tila" : "🌙 Tumma tila";
-    }
 });

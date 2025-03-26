@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookGenerator.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/theme-toggle.css" asp-append-version="true" />
+
 </head>
 
 <body>
@@ -56,9 +58,14 @@
                         }
 
                         <!-- Tumma/Vaalea tila aina näkyvissä -->
-                        <li class="nav-item">
-                            <button id="themeToggle" class="btn btn-success ms-2">🌙 Tumma tila</button>
+                        <li class="nav-item d-flex align-items-center">
+                            <label class="theme-switch">
+                                <input type="checkbox" id="themeToggle" />
+                                <span class="slider"></span>
+                            </label>
                         </li>
+
+
                     </ul>
                 </div>
             </div>

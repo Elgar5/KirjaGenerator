@@ -25,7 +25,7 @@ body {
   color: var(--text-color);
   margin: 0;
   padding: 0;
-  padding-top: 200px; /* Lisätään tilaa navbarin alle */
+  padding-top: 200px;
 }
 
 /* 🔼 Navigaatiopalkki */
@@ -44,20 +44,26 @@ body {
   border-bottom: 2px solid var(--card-border);
 }
 
-/* Navigaatio-linkit vasemmalle */
-.nav-left {
+.dark-mode .navbar {
+  background-color: #222 !important;
+  border-bottom: 2px solid #444;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .navbar a {
+  color: var(--text-color) !important;
+}
+
+/* Navigaatio-linkit vasemmalle ja oikealle */
+.nav-left,
+.nav-right {
   display: flex;
   gap: 20px;
 }
 
-/* Painikkeet oikealle */
-.nav-right {
-  display: flex;
-  gap: 15px;
-}
-
-/* 🔑 Login-painike */
-#loginButton, #themeToggle {
+/* 🔘 Painikkeet */
+#loginButton,
+#themeToggle {
   padding: 8px 15px;
   border: none;
   border-radius: 6px;
@@ -74,7 +80,6 @@ body {
   background-color: #0056b3;
 }
 
-/* 🌙 Tumma tila -painike */
 #themeToggle {
   background-color: var(--button-bg);
   color: white;
@@ -84,14 +89,28 @@ body {
   background-color: var(--button-hover-bg);
 }
 
-/* 🔍 Keskitetty hakukenttä */
+/* 👤 Käyttäjän sähköpostin tyyli */
+.user-email {
+  color: var(--text-color);
+}
+
+/* 🔧 Tekstit navbarissa tummassa tilassa */
+.dark-mode .nav-link,
+.dark-mode .nav-link span,
+.dark-mode form .nav-link,
+.dark-mode .btn-link {
+  color: var(--text-color) !important;
+}
+
+/* 🔍 Hakukenttä ja tulokset */
 .container {
   max-width: 800px;
   margin: 60px auto 40px;
   text-align: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-/* 🔎 Hakukentän ja painikkeiden muotoilu */
 .search-box {
   display: flex;
   justify-content: center;
@@ -122,7 +141,6 @@ body {
   background-color: var(--button-hover-bg);
 }
 
-/* 📚 Kirjatulokset */
 #results {
   max-width: 700px;
   margin: auto;
@@ -139,6 +157,7 @@ body {
   gap: 15px;
   padding: 15px;
   background-color: var(--card-bg);
+  color: var(--text-color);
   border-radius: 8px;
   border: 1px solid var(--card-border);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -156,7 +175,6 @@ body {
 
 .book-card p {
   margin: 5px 0;
-  color: var(--text-color);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -176,19 +194,16 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 📋 Modal-ikkunan sisältö */
 .modal-content {
   text-align: center;
 }
 
-/* ❌ Sulkupainike */
 .close {
   float: right;
   font-size: 20px;
   cursor: pointer;
 }
 
-/* ✏️ Input-kenttien tyyli */
 .modal input {
   width: 100%;
   padding: 10px;
@@ -198,7 +213,6 @@ body {
   font-size: 16px;
 }
 
-/* 🔘 Napin tyyli */
 .modal button {
   width: 100%;
   padding: 12px;
@@ -214,53 +228,76 @@ body {
   background-color: var(--button-hover-bg);
 }
 
-/* 📱 Mobiiliystävällisyys */
-@media (max-width: 600px) {
-  .search-box {
-      flex-direction: column;
-      gap: 8px;
-  }
-
-  .modal {
-      width: 90%;
-  }
-
-  #themeToggle, #loginButton {
-      font-size: 14px;
-      padding: 6px 12px;
-  }
-}
-
-/* ✅ Navbarin tausta ja teksti tummassa tilassa */
-.dark-mode .navbar {
-  background-color: #222 !important;
-  border-bottom: 2px solid #444;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode .navbar a {
-  color: #e0e0e0 !important;
-}
-
-/* 🔥 Korjataan vaalea palkki ylimpänä */
-.dark-mode body {
-  background-color: #121212 !important;
-}
-
-/* 🖤 Kirjautumisikkuna tummassa tilassa */
+/* 🖤 Tumma tila - modaalit */
 .dark-mode .modal {
   background-color: #242424 !important;
   color: #e0e0e0;
 }
 
-/* 🖤 Input-kentät tummassa tilassa */
 .dark-mode .modal input {
   background-color: #333 !important;
   color: #e0e0e0 !important;
   border: 1px solid #555 !important;
 }
 
-/* 🖤 Sulkupainike tummassa tilassa */
 .dark-mode .modal .close {
   color: #e0e0e0;
+}
+
+/* 📱 Mobiili */
+@media (max-width: 600px) {
+  .search-box {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  #themeToggle,
+  #loginButton {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+/* 🌗 Tumma/Vaalea tila - smooth siirtymät */
+body,
+.navbar,
+.container,
+.modal,
+.book-card,
+#themeToggle {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 🔄 Painikkeen ikonipyöräytys */
+#themeToggle.rotate {
+  animation: rotateIcon 0.4s ease;
+}
+
+@keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+/* ✨ Fade-efekti kevyesti koko sivulle */
+body.fade-theme {
+  animation: fadeTheme 0.3s ease;
+}
+
+@keyframes fadeTheme {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

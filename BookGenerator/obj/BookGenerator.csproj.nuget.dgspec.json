@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {}
+    "C:\\Github\\KirjaGenerator\\BookGenerator\\BookGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj": {
+    "C:\\Github\\KirjaGenerator\\BookGenerator\\BookGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
+        "projectUniqueName": "C:\\Github\\KirjaGenerator\\BookGenerator\\BookGenerator.csproj",
         "projectName": "BookGenerator",
-        "projectPath": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\BookGenerator.csproj",
+        "projectPath": "C:\\Github\\KirjaGenerator\\BookGenerator\\BookGenerator.csproj",
         "packagesPath": "C:\\Users\\teemu\\.nuget\\packages\\",
-        "outputPath": "C:\\Alkuaineet\\KirjaGeneraattori\\BookGenerator\\obj\\",
+        "outputPath": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -88,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
