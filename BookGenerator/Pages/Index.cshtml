@@ -1,21 +1,27 @@
 ﻿@page
-@model IndexModel
+@using BookGenerator.Models
+@using BookGenerator.Data
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@model BookGenerator.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Home page";
 }
 
+@Html.AntiForgeryToken()
+
 <div class="container">
-    <h1>Google Books API Test</h1>
-    <div class="search-box">
-        <label for="searchType">Select Search Type:</label>
-        <select id="searchType" onchange="toggleSearchInput()">
+    <h1 class="text-light">Google Books API Test</h1>
+    <div class="search-box dark-theme">
+        <label for="searchType" class="text-light">Select Search Type:</label>
+        <select id="searchType" onchange="toggleSearchInput()" class="form-control dark-select">
             <option value="random">Random</option>
             <option value="year">Year</option>
             <option value="author">Author</option>
             <option value="genre">Genre</option>
         </select>
-        <input type="text" id="searchInput" placeholder="Optional">
-        <select id="genreSelect" style="display:none;">
+        <input type="text" id="searchInput" placeholder="Optional" class="form-control dark-input">
+        <select id="genreSelect" style="display:none;" class="form-control dark-select">
             <option value="action">Action</option>
             <option value="adventure">Adventure</option>
             <option value="biography">Biography</option>
@@ -28,10 +34,77 @@
             <option value="science fiction">Science Fiction</option>
             <option value="thriller">Thriller</option>
         </select>
-        <button onclick="searchBook()">Search</button>
+        <button onclick="searchBook()" class="btn btn-primary">Search</button>
     </div>
-    <div id="results"></div>
+    <div id="results" class="dark-results"></div>
 </div>
+
+<style>
+    .dark-theme {
+        background-color: #2d2d2d;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .dark-select,
+    .dark-input {
+        background-color: #3d3d3d;
+        color: #fff;
+        border: 1px solid #4d4d4d;
+    }
+
+    .dark-results {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .book-card {
+        background-color: #2d2d2d;
+        color: #fff;
+        border: 1px solid #4d4d4d;
+        padding: 15px;
+        border-radius: 8px;
+        width: 200px;
+    }
+
+    .book-image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .add-library-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .book-image-container:hover .add-library-btn {
+        opacity: 1;
+    }
+
+    .book-card h3 {
+        margin-top: 10px;
+        font-size: 1.1em;
+        color: #fff;
+    }
+
+    .book-card p {
+        color: #ccc;
+        margin: 5px 0;
+    }
+</style>
 
 @section Scripts {
     <script>
@@ -68,30 +141,73 @@
                         return;
                     }
 
-                    const randomBook = books[Math.floor(Math.random() * books.length)].volumeInfo;
-
-                    const title = randomBook.title || 'No title available';
-                    const authors = randomBook.authors ? randomBook.authors.join(', ') : 'Unknown author';
-                    const publishedDate = randomBook.publishedDate || 'Unknown date';
-                    const description = randomBook.description ? randomBook.description.substring(0, 300) + '...' : 'No description available.';
-                    const thumbnail = randomBook.imageLinks?.thumbnail || '';
-
-                    document.getElementById('results').innerHTML = `
-                        <div class="book-card">
-                            ${thumbnail ? `<img src="${thumbnail}" alt="Book Cover">` : ''}
-                            <div>
-                                <h3>${title}</h3>
-                                <p><strong>Authors:</strong> ${authors}</p>
-                                <p><strong>Published:</strong> ${publishedDate}</p>
-                                <p>${description}</p>
-                            </div>
-                        </div>
-                    `;
+                    displayResults(books);
                 })
                 .catch(error => {
                     console.error("Error fetching book data:", error);
                     document.getElementById('results').innerHTML = '<p>Failed to fetch books. Please try again.</p>';
                 });
+        }
+
+        function displayResults(books) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = books.map(book => {
+                const volumeInfo = book.volumeInfo;
+                const thumbnail = volumeInfo.imageLinks?.thumbnail || '/images/no-cover.png';
+                const title = volumeInfo.title?.replace(/'/g, "\\'") || 'Unknown';
+                const authors = (volumeInfo.authors || ['Unknown'])?.join(', ').replace(/'/g, "\\'");
+                const year = volumeInfo.publishedDate?.substring(0, 4) || 'Unknown';
+
+                return `
+                                                                    <div class="book-card">
+                                                                        <div class="book-image-container">
+                                                                            <img src="${thumbnail}" alt="${title}">
+                                                                            <button class="add-library-btn" onclick="addToLibrary('${title}', '${authors}', '${year}')">
+                                                                                Add to Library
+                                                                            </button>
+                                                                        </div>
+                                                                        <h3>${title}</h3>
+                                                                        <p>Author: ${authors}</p>
+                                                                        <p>Year: ${year}</p>
+                                                                    </div>
+                                                                `;
+            }).join('');
+        }
+
+        async function addToLibrary(title, author, year) {
+            try {
+                // Log the data being sent
+                console.log('Sending book data:', { title, author, year });
+
+                const response = await fetch('/Library?handler=AddBook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
+                        'X-Requested-With': 'XMLHttpRequest'  // Add this line
+                    },
+                    body: JSON.stringify({
+                        Title: title,
+                        Author: author,
+                        PublicationYear: parseInt(year) || 0
+                    })
+                });
+
+                // Log the response
+                console.log('Response status:', response.status);
+                const result = await response.json();
+                console.log('Response data:', result);
+
+                if (result.success) {
+                    alert('Book added to your library successfully!');
+                    window.location.href = '/Library'; // Redirect to library page
+                } else {
+                    alert(result.message || 'Failed to add book to library');
+                }
+            } catch (error) {
+                console.error('Detailed error:', error);
+                alert('Error adding book to library');
+            }
         }
     </script>
 }

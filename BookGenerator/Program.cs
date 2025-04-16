@@ -1,22 +1,42 @@
+using BookGenerator.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BookGenerator.Data;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<AppDbContent>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
+    .AddEntityFrameworkStores<AppDbContent>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+    });
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.EnsureCreated(); // Luo tietokannan, jos sitä ei ole
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContent>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+        // Ensure database is created
+        context.Database.EnsureCreated();
+
+        Console.WriteLine("Database initialization completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred while initializing the database: {ex.Message}");
+    }
 }
 
 app.UseStaticFiles();  // Lisää tämä varmistaaksesi, että CSS ladataan oikein

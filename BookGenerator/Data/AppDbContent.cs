@@ -1,12 +1,18 @@
+// File: Data/AppDbContent.cs
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BookGenerator.Models; // Ensure the models are still included for the Book class
 
-public class AppDbContext : IdentityDbContext<ApplicationUser>
+namespace BookGenerator.Data // Change this to BookGenerator.Data
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public class AppDbContent : IdentityDbContext<ApplicationUser>
     {
-    }
+        public AppDbContent(DbContextOptions<AppDbContent> options)
+            : base(options)
+        {
+        }
 
-    // Your DbSets go here
+        public DbSet<Book> Book { get; set; } // The DbSet for the Book entity
+    }
 }
