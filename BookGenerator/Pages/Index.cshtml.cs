@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BookGenerator.Data;
 using BookGenerator.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookGenerator.Pages
 {
@@ -30,27 +31,32 @@ namespace BookGenerator.Pages
 
         public void OnGet()
         {
-            // Optionally handle the GET logic (e.g., to display some initial data)
+            // Optional logic for GET requests (e.g. initial load)
         }
 
-        // OnPost handler to handle book submission
+        // Handler for traditional form-based post (not used in this case but still included)
         public async Task<IActionResult> OnPostAddToLibraryAsync()
         {
             if (ModelState.IsValid)
             {
-                _db.Book.Add(NewBook); // Add the new book to the database
-                await _db.SaveChangesAsync(); // Save the changes to the database
-                return RedirectToPage("Library"); // Redirect to the Library page
+                _db.Book.Add(NewBook);
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Library");
             }
 
-            return Page(); // Stay on the same page if validation fails
+            return Page();
         }
 
+        // Called by JavaScript to save a book using fetch
         public async Task<IActionResult> OnPostAddBookAsync([FromBody] Book newBook)
         {
             if (!ModelState.IsValid)
             {
-                return new JsonResult(new { success = false, message = "Invalid data: " + string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)) });
+                return new JsonResult(new
+                {
+                    success = false,
+                    message = "Invalid data: " + string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))
+                });
             }
 
             var user = await _userManager.GetUserAsync(User);
@@ -59,7 +65,6 @@ namespace BookGenerator.Pages
                 return new JsonResult(new { success = false, message = "User not logged in" });
             }
 
-            // Add debug logging
             Console.WriteLine($"Adding book: {newBook.Title} for user: {user.Id}");
 
             newBook.UserId = user.Id;
@@ -67,6 +72,25 @@ namespace BookGenerator.Pages
             await _db.SaveChangesAsync();
 
             return new JsonResult(new { success = true });
+        }
+
+        // New: Fetches distinct authors from user's saved books
+        [HttpGet]
+        public async Task<IActionResult> OnGetMyAuthorsAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return new JsonResult(new List<string>()); // Empty if not logged in
+            }
+
+            var authors = await _db.Book
+                .Where(b => b.UserId == user.Id && !string.IsNullOrEmpty(b.Author))
+                .Select(b => b.Author)
+                .Distinct()
+                .ToListAsync();
+
+            return new JsonResult(authors);
         }
     }
 }

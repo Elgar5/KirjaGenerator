@@ -11,7 +11,7 @@
 @Html.AntiForgeryToken()
 
 <div class="container">
-    <h1 class="text-light">Google Books API Test</h1>
+    <h1 class="text-light">Book Discovery</h1>
     <div class="search-box dark-theme">
         <label for="searchType" class="text-light">Select Search Type:</label>
         <select id="searchType" onchange="toggleSearchInput()" class="form-control dark-select">
@@ -19,8 +19,10 @@
             <option value="year">Year</option>
             <option value="author">Author</option>
             <option value="genre">Genre</option>
+            <option value="my-authors">My Authors</option>
         </select>
-        <input type="text" id="searchInput" placeholder="Optional" class="form-control dark-input">
+
+        <input type="text" id="searchInput" placeholder="Optional" class="form-control dark-input" />
         <select id="genreSelect" style="display:none;" class="form-control dark-select">
             <option value="action">Action</option>
             <option value="adventure">Adventure</option>
@@ -34,8 +36,10 @@
             <option value="science fiction">Science Fiction</option>
             <option value="thriller">Thriller</option>
         </select>
+
         <button onclick="searchBook()" class="btn btn-primary">Search</button>
     </div>
+
     <div id="results" class="dark-results"></div>
 </div>
 
@@ -110,42 +114,80 @@
     <script>
         function toggleSearchInput() {
             const type = document.getElementById('searchType').value;
-            document.getElementById('searchInput').style.display = (type !== 'genre') ? 'block' : 'none';
+            document.getElementById('searchInput').style.display = (type === 'author' || type === 'year') ? 'block' : 'none';
             document.getElementById('genreSelect').style.display = (type === 'genre') ? 'block' : 'none';
         }
 
         function searchBook() {
             const searchType = document.getElementById('searchType').value;
-            const searchInput = document.getElementById('searchInput').value;
+            const searchInput = document.getElementById('searchInput').value.trim();
             const genre = document.getElementById('genreSelect').value;
-            let query = '';
 
-            if (searchType === 'author') {
-                query = `inauthor:${searchInput}`;
-            } else if (searchType === 'year') {
-                query = 'book';
+            if (searchType === 'my-authors') {
+                fetchMyAuthorsBooks();
+                return;
+            }
+
+            let query = '';
+            if (searchType === 'author' && searchInput) {
+                query = `inauthor:${encodeURIComponent(searchInput)}`;
+            } else if (searchType === 'year' && searchInput) {
+                query = `subject:book+inpublisher:${encodeURIComponent(searchInput)}`;
             } else if (searchType === 'genre') {
-                query = `subject:${genre}`;
+                query = `subject:${encodeURIComponent(genre)}`;
             } else {
                 query = 'book';
             }
 
             const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
+            fetchBooks(apiUrl);
+        }
 
+        function fetchBooks(apiUrl) {
             fetch(apiUrl)
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
                     const books = data.items;
                     if (!books || books.length === 0) {
                         document.getElementById('results').innerHTML = '<p>No books found.</p>';
                         return;
                     }
-
                     displayResults(books);
                 })
                 .catch(error => {
-                    console.error("Error fetching book data:", error);
-                    document.getElementById('results').innerHTML = '<p>Failed to fetch books. Please try again.</p>';
+                    console.error("Error fetching books:", error);
+                    document.getElementById('results').innerHTML = '<p>Something went wrong while fetching books.</p>';
+                });
+        }
+
+        function fetchMyAuthorsBooks() {
+            fetch('/Index?handler=MyAuthors')
+                .then(res => res.json())
+                .then(authors => {
+                    if (!authors || authors.length === 0) {
+                        document.getElementById('results').innerHTML = '<p>No authors found in your library.</p>';
+                        return;
+                    }
+
+                    const fetches = authors.map(author => {
+                        const query = `inauthor:${encodeURIComponent(author)}`;
+                        const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=5`;
+                        return fetch(apiUrl).then(res => res.json());
+                    });
+
+                    Promise.all(fetches)
+                        .then(results => {
+                            const allBooks = results.flatMap(r => r.items || []);
+                            if (allBooks.length === 0) {
+                                document.getElementById('results').innerHTML = '<p>No books found for your authors.</p>';
+                                return;
+                            }
+                            displayResults(allBooks);
+                        })
+                        .catch(error => {
+                            console.error("Error fetching books for authors:", error);
+                            document.getElementById('results').innerHTML = '<p>Something went wrong while loading books.</p>';
+                        });
                 });
         }
 
@@ -155,36 +197,32 @@
                 const volumeInfo = book.volumeInfo;
                 const thumbnail = volumeInfo.imageLinks?.thumbnail || '/images/no-cover.png';
                 const title = volumeInfo.title?.replace(/'/g, "\\'") || 'Unknown';
-                const authors = (volumeInfo.authors || ['Unknown'])?.join(', ').replace(/'/g, "\\'");
+                const authors = (volumeInfo.authors || ['Unknown']).join(', ').replace(/'/g, "\\'");
                 const year = volumeInfo.publishedDate?.substring(0, 4) || 'Unknown';
 
                 return `
-                                                                    <div class="book-card">
-                                                                        <div class="book-image-container">
-                                                                            <img src="${thumbnail}" alt="${title}">
-                                                                            <button class="add-library-btn" onclick="addToLibrary('${title}', '${authors}', '${year}')">
-                                                                                Add to Library
-                                                                            </button>
-                                                                        </div>
-                                                                        <h3>${title}</h3>
-                                                                        <p>Author: ${authors}</p>
-                                                                        <p>Year: ${year}</p>
-                                                                    </div>
-                                                                `;
+                    <div class="book-card">
+                        <div class="book-image-container">
+                            <img src="${thumbnail}" alt="${title}">
+                            <button class="add-library-btn" onclick="addToLibrary('${title}', '${authors}', '${year}')">
+                                Add to Library
+                            </button>
+                        </div>
+                        <h3>${title}</h3>
+                        <p>Author: ${authors}</p>
+                        <p>Year: ${year}</p>
+                    </div>`;
             }).join('');
         }
 
         async function addToLibrary(title, author, year) {
             try {
-                // Log the data being sent
-                console.log('Sending book data:', { title, author, year });
-
                 const response = await fetch('/Library?handler=AddBook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
-                        'X-Requested-With': 'XMLHttpRequest'  // Add this line
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
                     body: JSON.stringify({
                         Title: title,
@@ -193,19 +231,15 @@
                     })
                 });
 
-                // Log the response
-                console.log('Response status:', response.status);
                 const result = await response.json();
-                console.log('Response data:', result);
-
                 if (result.success) {
-                    alert('Book added to your library successfully!');
-                    window.location.href = '/Library'; // Redirect to library page
+                    alert('Book added to your library!');
+                    window.location.href = '/Library';
                 } else {
-                    alert(result.message || 'Failed to add book to library');
+                    alert(result.message || 'Failed to add book');
                 }
             } catch (error) {
-                console.error('Detailed error:', error);
+                console.error('Error adding book:', error);
                 alert('Error adding book to library');
             }
         }
