@@ -74,7 +74,7 @@ namespace BookGenerator.Pages
             return new JsonResult(new { success = true });
         }
 
-        // New: Fetches distinct authors from user's saved books
+        //Fetches distinct authors from user's saved books
         [HttpGet]
         public async Task<IActionResult> OnGetMyAuthorsAsync()
         {

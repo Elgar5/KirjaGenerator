@@ -17,65 +17,65 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BookGenerator
 build_property.RootNamespace = BookGenerator
-build_property.ProjectDir = C:\Users\ville\Documents\GitHub\KirjaGenerator\BookGenerator\
+build_property.ProjectDir = C:\Github\KirjaGenerator\BookGenerator\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ville\Documents\GitHub\KirjaGenerator\BookGenerator
+build_property.MSBuildProjectDirectory = C:\Github\KirjaGenerator\BookGenerator
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/ChangePasword.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhbmdlUGFzd29yZC5jc2h0bWw=
+[C:/Github/KirjaGenerator/BookGenerator/Pages/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/DeleteAccount.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/DeleteAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlQWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Error.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Index.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Library.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Library.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlicmFyeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Login.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Logout.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Privacy.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Register.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/_ViewImports.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/_ViewStart.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ville/Documents/GitHub/KirjaGenerator/BookGenerator/Pages/Shared/_Layout.cshtml]
+[C:/Github/KirjaGenerator/BookGenerator/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2r8dh74u4h

@@ -11,11 +11,11 @@
 @Html.AntiForgeryToken()
 
 <div class="library-container dark-theme">
-    <h1 class="text-light">Library</h1>
+    <h1>Library</h1>
 
     <a class="btn btn-primary mb-3" href="/">Search and Add More Books</a>
 
-    <h2 class="text-light">Book List (@Model.Books.Count)</h2>
+    <h2>Book List (@Model.Books.Count)</h2>
 
     @if (Model.IsBookAdded)
     {
@@ -24,81 +24,34 @@
 
     @if (Model.Books.Any())
     {
-        <table class="table dark-theme">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Publication Year</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var book in Model.Books)
-                {
-                    <tr data-book-id="@book.Id">
-                        <td class="book-title">@book.Title</td>
-                        <td class="book-author">@book.Author</td>
-                        <td class="book-publication-year">@book.PublicationYear</td>
-                        <td>
-                            <button class="btn btn-danger delete-book" data-id="@book.Id">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="book-list">
+            @foreach (var book in Model.Books)
+            {
+                <div class="book-card" data-book-id="@book.Id">
+                    <div class="book-image-container">
+                        <img src="@book.ThumbnailUrl" alt="@book.Title" />
+                    </div>
+                    <div class="book-details">
+                        <h3>@book.Title</h3>
+                        <p>Author: @book.Author</p>
+                        <p>Year: @book.PublicationYear</p>
+                        @if (!string.IsNullOrEmpty(book.Description))
+                        {
+                            <p><strong>Description:</strong> @book.Description</p>
+                        }
+                        <button class="btn btn-danger delete-book" data-id="@book.Id">Delete</button>
+                    </div>
+                </div>
+
+            }
+        </div>
     }
     else
     {
-        <p class="text-light">No books available.</p>
+        <p>No books available.</p>
     }
+
 </div>
-
-<style>
-    .library-container {
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .dark-theme {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-    }
-
-    .table.dark-theme {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-    }
-
-    .table.dark-theme thead {
-        background-color: var(--card-bg);
-    }
-
-    .table.dark-theme th,
-    .table.dark-theme td {
-        border-color: var(--card-border);
-        color: var(--text-color);
-    }
-
-    .table.dark-theme tbody tr:hover {
-        background-color: var(--card-border);
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
-
-    .btn-danger:hover {
-        background-color: #bb2d3b;
-        border-color: #b02a37;
-    }
-
-    .text-light {
-        color: var(--text-color) !important;
-    }
-</style>
 
 @section Scripts {
     <script>

@@ -1,17 +1,20 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("themeToggle");
-    const body = document.body;
+    const root = document.documentElement;
 
-    // Lataa tallennettu tila
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark-mode") {
-        body.classList.add("dark-mode");
-        toggle.checked = true;
+    if (toggle) {  // 👉 tarkistetaan löytyykö napin elementti
+        // Lataa tallennettu tila
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark" || savedTheme === "dark-mode") {
+            root.classList.add("dark-mode");
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener("change", () => {
+            const isDark = toggle.checked;
+            root.classList.toggle("dark-mode", isDark);
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
     }
-
-    toggle.addEventListener("change", () => {
-        const isDark = toggle.checked;
-        body.classList.toggle("dark-mode", isDark);
-        localStorage.setItem("theme", isDark ? "dark-mode" : "");
-    });
 });
+
