@@ -25,14 +25,25 @@ document.addEventListener("DOMContentLoaded", function () {
 // Handles the search logic based on the selected type and input value
 function searchBook() {
     const button = document.getElementById('searchButton');
-    button.disabled = true;                        // 🔒 estetään painike
-    button.textContent = 'Please wait...';         // ⏳ väliaikainen teksti
+    let cooldown = 3; // ⏱️ 3 sekuntia
+    button.disabled = true;
 
-    setTimeout(() => {
-        button.disabled = false;                   // 🔓 uudelleen aktivoidaan
-        button.textContent = 'Search';             // 🔁 palautetaan alkuperäinen teksti
-    }, 3000); // 3 sekuntia
+    // Näytetään jäljellä oleva aika painikkeessa
+    button.textContent = `Wait (${cooldown})`;
 
+    // Päivitetään teksti sekunnin välein
+    const interval = setInterval(() => {
+        cooldown--;
+        if (cooldown > 0) {
+            button.textContent = `Wait (${cooldown})`;
+        } else {
+            clearInterval(interval);
+            button.disabled = false;
+            button.textContent = 'Search';
+        }
+    }, 1000);
+
+    // 🔍 Varsinainen haku alkaa heti
     const searchType = document.getElementById('searchType').value;
     const searchInput = document.getElementById('searchInput').value.trim();
     const genre = document.getElementById('genreSelect').value;
@@ -56,6 +67,7 @@ function searchBook() {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
     fetchBooks(apiUrl);
 }
+
 
 // Fetch books from Google Books API
 // Fetches books based on the provided API URL and displays them
