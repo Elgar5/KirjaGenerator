@@ -48,17 +48,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"og00u4em9b"},{"Name":"integrity","Value":"sha256-WND8y3H\u002B7Y9HXnqclZ2CW35zCwVNuTJ8eBsNF/w5RgY="},{"Name":"label","Value":"_content/BookGenerator/css/password.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2044"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022WND8y3H\u002B7Y9HXnqclZ2CW35zCwVNuTJ8eBsNF/w5RgY=\u0022"},{"Name":"Last-Modified","Value":"Mon, 28 Apr 2025 07:15:42 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/BookGenerator/css/site.bkhmbfuv7l.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bkhmbfuv7l"},{"Name":"integrity","Value":"sha256-aylS5cxvaOpmInFUrsP5Uso0y0OrNNFhpYGhTGrkJVM="},{"Name":"label","Value":"_content/BookGenerator/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"7243"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aylS5cxvaOpmInFUrsP5Uso0y0OrNNFhpYGhTGrkJVM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 05 May 2025 06:11:17 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/BookGenerator/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-o1LWSBzv\u002BE7/Edfh\u002BKeqgvsTL1udkOdoMiQdr/vrsFM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6525"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022o1LWSBzv\u002BE7/Edfh\u002BKeqgvsTL1udkOdoMiQdr/vrsFM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 28 Apr 2025 07:05:24 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/BookGenerator/css/site.tw467qwhhy.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"tw467qwhhy"},{"Name":"integrity","Value":"sha256-o1LWSBzv\u002BE7/Edfh\u002BKeqgvsTL1udkOdoMiQdr/vrsFM="},{"Name":"label","Value":"_content/BookGenerator/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6525"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022o1LWSBzv\u002BE7/Edfh\u002BKeqgvsTL1udkOdoMiQdr/vrsFM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 28 Apr 2025 07:05:24 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-aylS5cxvaOpmInFUrsP5Uso0y0OrNNFhpYGhTGrkJVM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"7243"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aylS5cxvaOpmInFUrsP5Uso0y0OrNNFhpYGhTGrkJVM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 05 May 2025 06:11:17 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/BookGenerator/css/Theme-Toggle.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Theme-Toggle.css'))</AssetFile>

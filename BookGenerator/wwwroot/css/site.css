@@ -108,6 +108,18 @@ body {
   color: var(--text-color);
 }
 
+.main-content {
+  max-width: 900px;
+  margin: 70px auto 40px;
+  padding: 30px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+
 .search-box {
   display: flex;
   justify-content: center;
@@ -319,6 +331,33 @@ body.fade-theme {
 
 .navbar .dropdown-toggle {
   color: var(--text-color);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--text-color);
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--button-bg);
+}
+
+.navbar-nav .dropdown-toggle {
+  font-weight: 500;
+}
+
+.navbar .theme-switch {
+  margin-left: 12px;
 }
 
 .dark-mode .dropdown-menu .dropdown-item {

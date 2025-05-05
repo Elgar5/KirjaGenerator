@@ -38,7 +38,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg shadow-sm">
-            <div class="container">
+            <div class="container main-content">
                 <a class="navbar-brand" asp-page="/Index">BookGenerator</a>
 
                 <!-- Hamburger menu -->
@@ -48,25 +48,35 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <ul class="navbar-nav me-auto">
+                    <!-- Vasemman reunan linkit -->
+                    <ul class="navbar-nav me-auto align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Index">🔍 Search</a>
+                            <a class="nav-link d-flex align-items-center gap-1" asp-page="/Index">
+                                🔍 <span>Search</span>
+                            </a>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav">
+                    <!-- Oikean reunan linkit -->
+                    <ul class="navbar-nav align-items-center">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    👤 @User.Identity.Name
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#"
+                                    id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    👤 <span>@User.Identity.Name</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Library">📚 Library</a></li>
-                                    <li><a class="dropdown-item" asp-page="/ChangePassword">✏️ Change Password</a></li>
-                                    <li><a class="dropdown-item text-danger" asp-page="/DeleteAccount">🗑️ Delete
-                                            Account</a></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Library">📚 Library</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/ChangePassword">✏️ Change Password</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" asp-page="/DeleteAccount">🗑️ Delete
+                                            Account</a>
+                                    </li>
                                     <li>
                                         <form method="post" asp-page="/Logout" class="d-inline">
                                             <button class="dropdown-item text-start w-100" type="submit">🚪 Logout</button>
@@ -77,8 +87,16 @@
                         }
                         else
                         {
-                            <li class="nav-item"><a class="nav-link" asp-page="/Login">🔑 Login</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-page="/Register">📝 Register</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-1" asp-page="/Login">
+                                    🔑 <span>Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-1" asp-page="/Register">
+                                    📝 <span>Register</span>
+                                </a>
+                            </li>
                         }
 
                         <li class="nav-item d-flex align-items-center ms-3">
@@ -92,6 +110,7 @@
             </div>
         </nav>
     </header>
+
 
     <div class="container">
         <main role="main" class="pb-3">
