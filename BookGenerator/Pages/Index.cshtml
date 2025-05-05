@@ -19,7 +19,10 @@
             <option value="year">Year</option>
             <option value="author">Author</option>
             <option value="genre">Genre</option>
-            <option value="my-authors">My Authors</option>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <option value="my-authors">My Authors</option>
+            }
         </select>
 
         <input type="text" id="searchInput" placeholder="Optional" class="form-control dark-input" />
@@ -46,4 +49,3 @@
 @section Scripts {
     <script src="~/js/index.js"></script>
 }
-
