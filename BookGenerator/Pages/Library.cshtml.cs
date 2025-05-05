@@ -58,7 +58,7 @@ namespace BookGenerator.Pages
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError("Model state is invalid");
-                    return new JsonResult(new { success = false, message = "Invalid data: " + string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)) });
+                    return new JsonResult(new { success = false, message = "Invalid data" });
                 }
 
                 var user = await _userManager.GetUserAsync(User);
@@ -68,8 +68,16 @@ namespace BookGenerator.Pages
                     return new JsonResult(new { success = false, message = "User not logged in" });
                 }
 
-                // Add debug logging
-                _logger.LogInformation($"Adding book: {newBook.Title} for user: {user.Id}");
+                // 🔒 Tarkista onko käyttäjällä jo 5 kirjaa
+                var currentCount = await _db.Book.CountAsync(b => b.UserId == user.Id);
+                if (currentCount >= 5)
+                {
+                    return new JsonResult(new
+                    {
+                        success = false,
+                        message = "You can only save up to 5 books. Please delete one before adding another."
+                    });
+                }
 
                 newBook.UserId = user.Id;
                 await _db.Book.AddAsync(newBook);

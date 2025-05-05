@@ -64,7 +64,7 @@ function searchBook() {
         query = 'book';
     }
 
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
     fetchBooks(apiUrl);
 }
 
@@ -101,7 +101,7 @@ function fetchMyAuthorsBooks() {
             // This function fetches books for each author and displays them
             const fetches = authors.map(author => {
                 const query = `inauthor:${encodeURIComponent(author)}`;
-                const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=10`;
+                const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
                 return fetch(apiUrl).then(res => res.json());
             });
             // Wait for all fetches to complete and then display results
@@ -145,13 +145,15 @@ function displayResults(books) {
 
     // ✅ Show information
     resultsDiv.innerHTML = `
-                            <div class="book-card">
-                                <div class="book-image-container">
-                                    <img src="${thumbnail}" alt="${title}">
-                                    <button class="add-library-btn" onclick="addToLibrary('${title}', '${authors}', '${year}', '${thumbnail}', \`${description}\`)">
-                                        Add to Library
-                                    </button>
-                                </div>
+    <div class="book-card">
+        <div class="book-image-container">
+            <img src="${thumbnail}" alt="${title}">
+            <button class="add-library-btn"
+                    ${isAuthenticated ? `onclick="addToLibrary('${title}', '${authors}', '${year}', '${thumbnail}', \`${description}\`)"` : 'onclick="redirectToLogin()"'}
+                    title="${isAuthenticated ? 'Add this book to your library' : 'Login to save this book'}">
+                📚 ${isAuthenticated ? 'Add to Library' : 'Login to Save'}
+            </button>
+        </div>
                                 <div class="book-details">
                                     <h3>${title}</h3>
                                     <p>Author: ${authors}</p>
@@ -172,8 +174,6 @@ async function addToLibrary(title, author, year, thumbnail, description) {
                 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
                 'X-Requested-With': 'XMLHttpRequest'
             },
-            // Send the book data as JSON
-            // This function sends the book data as JSON in the request body
             body: JSON.stringify({
                 Title: title,
                 Author: author,
@@ -188,10 +188,19 @@ async function addToLibrary(title, author, year, thumbnail, description) {
             alert('Book added to your library!');
             window.location.href = '/Library';
         } else {
-            alert(result.message || 'Failed to add book');
+            if (result.message.includes("5 books")) {
+                alert("❌ You already have 5 books saved. Please delete one before adding another.");
+            } else {
+                alert(result.message || 'Failed to add book');
+            }
         }
     } catch (error) {
         console.error('Error adding book:', error);
         alert('Error adding book to library');
     }
+}
+
+
+function redirectToLogin() {
+    window.location.href = '/Login';
 }

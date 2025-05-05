@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+290e0b549aa51efdd496d3fb8b1710c8db9f560c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd8575ec8c678c88c3357202994a4fdc58f13d70")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookGenerator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookGenerator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

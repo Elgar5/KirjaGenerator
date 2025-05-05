@@ -49,3 +49,7 @@
 @section Scripts {
     <script src="~/js/index.js"></script>
 }
+
+<script>
+    const isAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower(); // "true" tai "false"
+</script>

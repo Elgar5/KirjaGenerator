@@ -55,6 +55,7 @@
                                 🔍 <span>Search</span>
                             </a>
                         </li>
+                        <li><a class="dropdown-item" asp-page="/Library">📚 Library</a></li>
                     </ul>
 
                     <!-- Oikean reunan linkit -->
@@ -62,27 +63,27 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#"
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
                                     id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    👤 <span>@User.Identity.Name</span>
+                                    <div class="avatar-circle">
+                                        @User.Identity.Name.Substring(0, 1).ToUpper()
+                                    </div>
+                                    <span>Profile</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li>
-                                        <a class="dropdown-item" asp-page="/Library">📚 Library</a>
+                                    <li class="dropdown-header text-muted ps-3">
+                                        @User.Identity.Name
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-page="/ChangePassword">✏️ Change Password</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" asp-page="/DeleteAccount">🗑️ Delete
-                                            Account</a>
-                                    </li>
+                                    <li><a class="dropdown-item" asp-page="/ChangePassword">✏️ Change Password</a></li>
+                                    <li><a class="dropdown-item text-danger" asp-page="/DeleteAccount">🗑️ Delete
+                                            Account</a></li>
                                     <li>
                                         <form method="post" asp-page="/Logout" class="d-inline">
                                             <button class="dropdown-item text-start w-100" type="submit">🚪 Logout</button>
                                         </form>
                                     </li>
                                 </ul>
+
                             </li>
                         }
                         else
@@ -104,6 +105,15 @@
                                 <input type="checkbox" id="themeToggle" />
                                 <span class="slider"></span>
                             </label>
+                        </li>
+                        <li class="nav-item position-relative d-flex align-items-center ms-3">
+                            <span class="help-icon" tabindex="0">❓</span>
+                            <div class="help-tooltip">
+                                <strong>Need help?</strong><br />
+                                – Search by author, genre, or year<br />
+                                – Hover over a book image to save<br />
+                                – Login required to save books
+                            </div>
                         </li>
                     </ul>
                 </div>

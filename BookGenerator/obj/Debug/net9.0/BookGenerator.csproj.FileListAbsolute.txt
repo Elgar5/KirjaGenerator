@@ -416,7 +416,6 @@ C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\refint\BookGenerator.dll
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\BookGenerator.pdb
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\BookGenerator.genruntimeconfig.cache
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\ref\BookGenerator.dll
-C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\qlqpxtnm7g-qguelxlf83.gz
 C:\Alkuaineet\KirjaGenerator\BookGenerator\bin\Debug\net9.0\appsettings.Development.json
 C:\Alkuaineet\KirjaGenerator\BookGenerator\bin\Debug\net9.0\appsettings.json
 C:\Alkuaineet\KirjaGenerator\BookGenerator\bin\Debug\net9.0\BookGenerator.staticwebassets.runtime.json
@@ -1365,5 +1364,6 @@ C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\3ukm1dv9ey-7i
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\slsabsapbh-dxqfal6lsq.gz
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\9msyin4pa9-og00u4em9b.gz
 C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\y4jt13c3qs-dy588mv51k.gz
-C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\aeimklxo3h-dcojtkc1t9.gz
-C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\o1vhi3kb82-4tolbo57oa.gz
+C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\o1vhi3kb82-jdkph41ov3.gz
+C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\qlqpxtnm7g-vld4726yhj.gz
+C:\Github\KirjaGenerator\BookGenerator\obj\Debug\net9.0\compressed\aeimklxo3h-v4owgvko3m.gz
