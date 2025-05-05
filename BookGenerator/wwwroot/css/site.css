@@ -25,7 +25,7 @@ body {
   color: var(--text-color);
   margin: 0;
   padding: 0;
-  padding-top: 200px;
+  padding-top: 80px;
 }
 
 .avatar-circle {
@@ -124,8 +124,8 @@ body {
 
 .main-content {
   max-width: 900px;
-  margin: 70px auto 40px;
-  padding: 30px;
+  margin: 0 auto;
+  padding: 8px 20px;
   background-color: var(--card-bg);
   color: var(--text-color);
   border-radius: 12px;
@@ -223,7 +223,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
 }
 
@@ -254,14 +254,14 @@ body {
   left: 50%;
   z-index: 1000;
   width: 240px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: opacity 0.3s ease;
   font-size: 14px;
   pointer-events: none;
 }
 
-.help-icon:hover + .help-tooltip,
-.help-icon:focus + .help-tooltip {
+.help-icon:hover+.help-tooltip,
+.help-icon:focus+.help-tooltip {
   visibility: visible;
   opacity: 1;
 }
@@ -349,6 +349,7 @@ body.fade-theme {
   from {
     opacity: 0.3;
   }
+
   to {
     opacity: 1;
   }
@@ -362,6 +363,7 @@ body.fade-theme {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(180deg);
   }
@@ -440,6 +442,7 @@ body.fade-theme {
 .dark-mode .dropdown-menu form .dropdown-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
 .dark-mode .dropdown-header {
   color: var(--text-color) !important;
   opacity: 1 !important;
