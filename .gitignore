@@ -11,3 +11,17 @@ BookGenerator/obj/Debug/net9.0/staticwebassets/msbuild.BookGenerator.Microsoft.A
 BookGenerator/bin/Debug/net9.0/BookGenerator.dll
 BookGenerator/bin/Debug/net9.0/BookGenerator.pdb
 BookGenerator/User.db
+BookGenerator/obj/Debug/net9.0/staticwebassets/msbuild.BookGenerator.Microsoft.AspNetCore.StaticWebAssets.props
+BookGenerator/obj/Debug/net9.0/staticwebassets/msbuild.BookGenerator.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+BookGenerator/obj/Debug/net9.0/staticwebassets.development.json
+BookGenerator/obj/Debug/net9.0/staticwebassets.build.json
+BookGenerator/obj/Debug/net9.0/staticwebassets.build.endpoints.json
+BookGenerator/obj/Debug/net9.0/refint/BookGenerator.dll
+BookGenerator/obj/Debug/net9.0/ref/BookGenerator.dll
+BookGenerator/obj/Debug/net9.0/compressed/o1vhi3kb82-zilg05wcta.gz
+BookGenerator/obj/Debug/net9.0/compressed/o1vhi3kb82-mz8xs7poy0.gz
+BookGenerator/obj/Debug/net9.0/BookGenerator.sourcelink.json
+BookGenerator/obj/Debug/net9.0/BookGenerator.AssemblyInfo.cs
+BookGenerator/obj/Debug/net9.0/apphost.exe
+BookGenerator/bin/Debug/net9.0/BookGenerator.staticwebassets.runtime.json
+BookGenerator/bin/Debug/net9.0/BookGenerator.staticwebassets.endpoints.json

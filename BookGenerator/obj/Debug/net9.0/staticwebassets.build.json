@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+ryNad25tz5xbmldBUp8ABUDN81GOUHa7C70uiuMDdU=",
+  "Hash": "JQmH10z05UcQ5jjbBM00ti75/KMdTFvvmWgrqzSYVJ0=",
   "Source": "BookGenerator",
   "BasePath": "_content/BookGenerator",
   "Mode": "Default",
@@ -836,12 +836,12 @@
       "OriginalItemSpec": "C:\\Github\\KirjaGenerator\\BookGenerator\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-zilg05wcta.gz",
+      "Identity": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-mz8xs7poy0.gz",
       "SourceId": "BookGenerator",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/BookGenerator",
-      "RelativePath": "css/site#[.{fingerprint=zilg05wcta}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=mz8xs7poy0}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -850,8 +850,8 @@
       "RelatedAsset": "C:\\Github\\KirjaGenerator\\BookGenerator\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "dnbv01u0eb",
-      "Integrity": "udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo=",
+      "Fingerprint": "jjus872n08",
+      "Integrity": "YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Github\\KirjaGenerator\\BookGenerator\\wwwroot\\css\\site.css"
@@ -1585,8 +1585,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zilg05wcta",
-      "Integrity": "BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM=",
+      "Fingerprint": "mz8xs7poy0",
+      "Integrity": "wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -4429,12 +4429,12 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-zilg05wcta.gz",
+      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-mz8xs7poy0.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000497760080"
+          "Quality": "0.000501002004"
         }
       ],
       "ResponseHeaders": [
@@ -4444,15 +4444,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2008"
+          "Value": "1995"
         },
         {
           "Name": "ETag",
-          "Value": "\"udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo=\""
+          "Value": "\"YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4472,13 +4472,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM=\""
+          "Value": "W/\"wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM="
+          "Value": "sha256-wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ="
         }
       ]
     },
@@ -4493,7 +4493,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8437"
+          "Value": "8441"
         },
         {
           "Name": "Content-Type",
@@ -4501,11 +4501,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM=\""
+          "Value": "\"wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4515,13 +4515,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM="
+          "Value": "sha256-wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-zilg05wcta.gz",
+      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-mz8xs7poy0.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4530,7 +4530,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2008"
+          "Value": "1995"
         },
         {
           "Name": "Content-Type",
@@ -4538,11 +4538,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo=\""
+          "Value": "\"YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4560,18 +4560,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo="
+          "Value": "sha256-YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg="
         }
       ]
     },
     {
-      "Route": "css/site.zilg05wcta.css",
-      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-zilg05wcta.gz",
+      "Route": "css/site.mz8xs7poy0.css",
+      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-mz8xs7poy0.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000497760080"
+          "Quality": "0.000501002004"
         }
       ],
       "ResponseHeaders": [
@@ -4581,15 +4581,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2008"
+          "Value": "1995"
         },
         {
           "Name": "ETag",
-          "Value": "\"udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo=\""
+          "Value": "\"YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4609,13 +4609,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM=\""
+          "Value": "W/\"wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zilg05wcta"
+          "Value": "mz8xs7poy0"
         },
         {
           "Name": "label",
@@ -4623,12 +4623,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM="
+          "Value": "sha256-wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ="
         }
       ]
     },
     {
-      "Route": "css/site.zilg05wcta.css",
+      "Route": "css/site.mz8xs7poy0.css",
       "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4638,7 +4638,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8437"
+          "Value": "8441"
         },
         {
           "Name": "Content-Type",
@@ -4646,11 +4646,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM=\""
+          "Value": "\"wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4660,7 +4660,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zilg05wcta"
+          "Value": "mz8xs7poy0"
         },
         {
           "Name": "label",
@@ -4668,13 +4668,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-BfssPOK0N4OgRXmpbM4TRuhYLQtM9n8TgZejHrJSKQM="
+          "Value": "sha256-wlOQJsBZFude/SvCPX/Rh9W/6hIWsJgD8f819txyZGQ="
         }
       ]
     },
     {
-      "Route": "css/site.zilg05wcta.css.gz",
-      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-zilg05wcta.gz",
+      "Route": "css/site.mz8xs7poy0.css.gz",
+      "AssetFile": "C:\\Github\\KirjaGenerator\\BookGenerator\\obj\\Debug\\net9.0\\compressed\\o1vhi3kb82-mz8xs7poy0.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4683,7 +4683,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2008"
+          "Value": "1995"
         },
         {
           "Name": "Content-Type",
@@ -4691,11 +4691,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo=\""
+          "Value": "\"YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 07:46:00 GMT"
+          "Value": "Mon, 05 May 2025 07:57:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4713,7 +4713,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zilg05wcta"
+          "Value": "mz8xs7poy0"
         },
         {
           "Name": "label",
@@ -4721,7 +4721,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-udAuyH6qhDhyWJ3E+TMBXToY/KRJz5kHzXr2YL7CGzo="
+          "Value": "sha256-YRLeVsggR+/KMKZSXCL2+wtQaJjGINq4T7nTTgxGSsg="
         }
       ]
     },
